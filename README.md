@@ -38,9 +38,10 @@
     bcftools call -mv 1RNA_merge.vcf  -o 2calls.bcf --threads 40
 ### 2.7 Filter SNPs by sequence reads depth (threshold: 10)
     awk 'm=split($8,u,";"){y=split(u[1],x,"=")}{if(x[2]>=10) print $0}' 2calls.bcf  >3RNA_merge.vcf  
-
-## 2. Count the allelic reads from RNA-Seq alignment file (bam formatted).
-
+## 3.Obtain the common SNPs between RNA-Seq SNPs and resequenced SNPs, and keep only those SNPs within reference gene sets (from GFF file).
+    Rscript obtining_common_snp.R
+## 4. Count the allelic reads from RNA-Seq alignment file (bam formatted) at the SNPs sites derived from  the previous step.
+    python ASE_count.py -b RNA-Seq.bam -s common.SNP.vcf    
     usage: ASE_count.py [-h] -b BAM_FILE -s SNP_FILE [-m MAP_QUAL]
                     [--bq BASE_QUAL]
 
