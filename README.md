@@ -41,7 +41,8 @@
 ## 3.Obtain the common SNPs between RNA-Seq SNPs and resequenced SNPs, and keep only those SNPs within reference gene sets (from GFF file).
     Rscript obtining_common_snp.R
 ## 4. Count the allelic reads from RNA-Seq alignment file (bam formatted) at the SNPs sites derived from  the previous step.
-    python ASE_count.py -b RNA-Seq.bam -s common.SNP.vcf    
+    for m in $(ls ../5sorted_bam/*.bam);do echo $m; python ASE_count.py -b $m -s 4target.snp.txt --mq 0 --bq 0;done
+    
     usage: ASE_count.py [-h] -b BAM_FILE -s SNP_FILE [-m MAP_QUAL]
                     [--bq BASE_QUAL]
 
