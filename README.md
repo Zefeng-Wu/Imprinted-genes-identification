@@ -21,7 +21,8 @@
     gatk  SelectVariants -R ../reference_genome/Brapa_sequence_v3.0.fasta -variant B.rapa.vcf -O ../9snp/1SNP.vcf -select-type SNP 
  ### 1.9. Filter SNPs called from GATK pipline to keep the homozygou SNPs in each parental genome but different between two parental genomes.(Assumed to be diploid).
     python 2Filter.snp_from_gatk.py
-    
+ ### 1.10. Modified the SNP position in the vcf (important!) 
+    python Filter.snp_modified.py
 ## 2. RNA-Seq data analysis and call SNPs
  ### 2.1 Reads mapping to reference genome using Hisat2 or other mapping tools.
     for m in $(ls *_1.fq.gz); do if [ ! -f ../2Hisat_result/${m%_good_1.fq.gz}.sam ]; then echo $m; hisat2 -p 40 -x  ../../rapa_data/reference_genome/Brapa_sequence_v3.0 -1 $m -2 ${m%1.fq.gz}2.fq.gz --no-mixed  --no-discordant  -S ../2Hisat_result/${m%_good_1.fq.gz}.sam; fi; done
@@ -55,5 +56,7 @@
       -m MAP_QUAL, --mq MAP_QUAL
                         Set a mapping quality threshold (default:20)
       --bq BASE_QUAL        Set a base quality threshold (default:20)
-
+ ## 5. Merge mutiple files
+    awk '{for(i=1;i<=6;i++)printf("%s\t",$i);for(i=7;i<=NF;i+=6)printf("%s\t",$(i+4)"\t"$(i+5));print ""}' all.allel.counts.txt > 2all_allele_counts
+    ls -1  ../5sorted_bam/*.txt  | tr '\n' '\0' |xargs -0 -n 1 basename | grep -wo "T.." | xargs # get the sample name
 
