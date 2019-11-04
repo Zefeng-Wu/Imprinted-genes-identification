@@ -60,5 +60,5 @@
     paste ../5sorted_bam/*.txt >  5all.allel.counts.txt
     awk '{for(i=1;i<=6;i++)printf("%s\t",$i);for(i=7;i<=NF;i+=6)printf("%s\t",$(i+4)"\t"$(i+5));print ""}' all.allel.counts.txt > 2all_allele_counts
  ## Identification imprinted genes
- R script 7imprinted.R
+    R script 7imprinted.R
 
