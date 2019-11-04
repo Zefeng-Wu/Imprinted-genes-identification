@@ -59,5 +59,6 @@
  ## 5. Merge mutiple files
     paste ../5sorted_bam/*.txt >  5all.allel.counts.txt
     awk '{for(i=1;i<=6;i++)printf("%s\t",$i);for(i=7;i<=NF;i+=6)printf("%s\t",$(i+4)"\t"$(i+5));print ""}' all.allel.counts.txt > 2all_allele_counts
-    ls -1  ../5sorted_bam/*.txt  | tr '\n' '\0' |xargs -0 -n 1 basename | grep -wo "T.." | xargs # get the sample name
+ ## Identification imprinted genes
+ R script 7imprinted.R
 
