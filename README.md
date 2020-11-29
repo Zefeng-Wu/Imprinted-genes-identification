@@ -2,7 +2,7 @@
 ## 1. Resquencing data analysis and call SNPs
  ### 1.1 reads mapping
     bwa index Brapa_sequence_v3.0.fasta 
-    bwa mem -t 40 -M  -R "@RG\tID:01\tLB:01\tPL:Illumina\tPU:01\tSM:01" reference_genome/Brapa_sequence_v3.0.fasta Cole_R428-02-    R01_good_1.fq Cole_R428-02-R01_good_2.fq > 3sam/Cole_R428-02-R01_good.sam
+    bwa mem -t 40 -M  -R "@RG\tID:01\tLB:01\tPL:Illumina\tPU:01\tSM:01" reference_genome/Brapa_sequence_v3.0.fasta Cole_R428-02-R01_good_1.fq Cole_R428-02-R01_good_2.fq > 3sam/Cole_R428-02-R01_good.sam
     bwa mem -t 40 -M  -R "@RG\tID:02\tLB:02\tPL:Illumina\tPU:02\tSM:02" reference_genome/Brapa_sequence_v3.0.fasta Cole_R428-02-R02_good_1.fq Cole_R428-02-R02_good_2.fq > 3sam/Cole_R428-02-R02_good.sam
  ### 1.2 Sam to bam
     cd ../3sam
